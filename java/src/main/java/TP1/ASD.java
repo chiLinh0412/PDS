@@ -6,7 +6,7 @@ public class ASD {
   static public class Document {
     // Fill here!
     public String toNtriples() {
-      return "…";
+      return "Manu est dans la place !";
     }
   }
   // Fill here!
