@@ -5,7 +5,7 @@ repositories {
   mavenCentral()
 }
 
-/*
+
 dependencies {
   antlr 'org.antlr:antlr4:4.7.1'
 }
@@ -14,7 +14,7 @@ generateGrammarSource {
   arguments += [ '-no-visitor', '-no-listener' ]
   outputDirectory = new File(buildDir.toString() + "/generated-src/antlr/main/TP1/")
 }
-*/
+
 
 jar {
   manifest {
