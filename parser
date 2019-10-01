@@ -1,0 +1,81 @@
+parser grammar TurtleParser;
+
+options {
+  language = Java;
+  tokenVocab = TurtleLexer;
+}
+
+@header {
+  package TP1;
+}
+
+document returns [TP1.ASD.Document out]
+  : s=statements EOF { $out = new TP1.ASD.Document($s.out); }
+  ;
+
+//TURTLE
+statements returns [Turtle out]
+@init{
+    List<Sujet> listSujets = new ArrayList<Sujet>();
+}
+: (sujet { listSujets.add($sujet.subject); })* { $out = new Turtle(listSujets); } ;
+
+
+//SUJET
+sujet returns [Sujet subject]
+ @init{
+    List<Attr> listAttrs = new ArrayList<Attr>();
+ }
+ : entite (attr { listAttrs.add($attr.attribute); } PTVRG)* attr { listAttrs.add($attr.attribute); } POINT {$subject = new Sujet($entite.id, listAttrs); };
+
+
+//ATTR
+attr returns [Attr attribute]
+@init{
+    List<Complement> listComplements = new ArrayList<Complement>();
+}
+: entite (complement { listComplements.add($complement.compl); }  VIRG)* complement { listComplements.add($complement.compl); $attribute = new Attr($entite.id, listComplements); };
+
+
+
+
+complement returns [Complement compl] : entite { $compl = new ComplementI($entite.id); }
+                                        | chaine { $compl = new ComplementC($chaine.string); }
+                                        ;
+
+entite returns [Id id]: CHEVRON_GAUCHE ident CHEVRON_DROIT { $id = new Id($ident.name); };
+
+chaine returns [Chaine string]: GUILLEMET ident GUILLEMET { $string = new Chaine($ident.name); };
+
+ident returns [String name]: ID { $name = $ID.text; };
+
+
+
+
+// Grammaire non étendue
+//statements returns [Turtle out] : sujet suiteSujet {  } ;
+
+//sujet : entite attr suiteAttr suiteSujet ;
+
+//suiteSujet : POINT sujet
+           // |
+           // ;
+
+//attr : entite complement suiteComplement suiteAttr;
+
+//suiteAttr : PTVRG attr
+           // |
+           // ;
+
+//complement : entite suiteCompelement | chaine suiteComplement ;
+
+//suiteComplement : VIRG complement
+               // |
+               // ;
+
+//entite : CHEVRON_GAUCHE ident CHEVRON_DROIT ;
+
+//chaine : GUILLEMET ident GUILLEMET;
+
+//ident : ID;
+
