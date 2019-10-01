@@ -1,5 +1,5 @@
 apply plugin: 'java'
-// apply plugin: 'antlr'
+apply plugin: 'antlr'
 
 repositories {
   mavenCentral()

@@ -16,4 +16,7 @@ public abstract class Objet {
 		this.name = name;
 	}
 	
+	public String toNtriples() {
+		return name;
+	}
 }

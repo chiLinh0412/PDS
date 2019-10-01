@@ -22,9 +22,9 @@ public class ASD {
 				for (Reste r : p.getRestes()) {
 					for (Objet o : r.getObjects()) {
 						Ntriples = Ntriples + " " +
-								p.getSujet().getName() + " " + 
-								r.getPredicat().getName() + " "+
-								o.getName() +" .\n";
+								p.getSujet().toNtriples() + " " + 
+								r.getPredicat().toNtriples() + " "+
+								o.toNtriples() +" .\n";
 
 					}
 				}

@@ -8,7 +8,8 @@ public class Predicat {
 		this.name = new Entite(name).getName();
 	}
 	
-	public String getName() {
+	
+	public String toNtriples() {
 		return this.name;
 	}
 }
